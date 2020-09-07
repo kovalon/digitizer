@@ -8,6 +8,20 @@ from PIL import Image, ImageEnhance
 # создаем бота и даем ему токен авторизации
 bot = telebot.TeleBot('{INPUT YOUR BOT KEY}')
 
+# панель выбора образа цифры
+numbers = {
+    '0': 'zero',
+    '1': 'one',
+    '2': 'two',
+    '3': 'three',
+    '4': 'four',
+    '5': 'five',
+    '6': 'six',
+    '7': 'seven',
+    '8': 'eight',
+    '9': 'nine'
+}
+
 # тренируем нейронную сеть перед началом работы бота
 # задание начальных значений и запуск сети
 input_nodes = 784
@@ -140,46 +154,9 @@ def send_text(message):
     elif message.text.lower() == 'назад':
         print("Writing answer to start message")
         bot.send_message(message.chat.id, 'Стартовое меню. Выберите раздел', reply_markup=start_menu)
-    elif message.text.lower() == '0':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\zero.png', 'rb')
+    else:
+        photo = open('neuro_photos/{}.png'.format(message.text.lower()))
         bot.send_photo(message.chat.id, photo)
         photo.close()
-    elif message.text.lower() == '1':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\one.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-    elif message.text.lower() == '2':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\\two.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-    elif message.text.lower() == '3':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\\three.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-    elif message.text.lower() == '4':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\\four.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-    elif message.text.lower() == '5':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\\five.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-    elif message.text.lower() == '6':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\six.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-    elif message.text.lower() == '7':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\seven.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-    elif message.text.lower() == '8':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\eight.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-    elif message.text.lower() == '9':
-        photo = open('D:\python_projects\digitizer\\neuro_photos\\nine.png', 'rb')
-        bot.send_photo(message.chat.id, photo)
-        photo.close()
-
 
 bot.polling()
